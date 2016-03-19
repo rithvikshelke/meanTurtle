@@ -87,9 +87,10 @@ public class Reflection {
 	}
 	
 	public static String checkType(Field field) {
-		if(field.getType().toString().contains("FlagType")) {
-			return "FlagType";
-		} else if (field.getType().toString().contains("List")) {
+		//if(field.getType().toString().contains("FlagType")) {
+	//		return "FlagType";
+	//	} else 
+	if (field.getType().toString().contains("List")) {
 			return "List";
 		} else if(field.getType().toString().contains("Map")) {			
 			return "Map";
@@ -112,13 +113,13 @@ public class Reflection {
 	    }
 	}
 	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SecurityException, NoSuchFieldException {
-		String classname = "com.thomsonreuters.cpp.cps.common.messages.schema.UriType";
+		String classname = "com.test.UriType";
 		Class<?> classHandle = Class.forName(classname.toString());
 		Reflection reflect = new Reflection();
 		Object myObject = classHandle.newInstance();
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("contentPreparationServiceMessage.serviceRequest.requestInfo.compressionRequest.outputDir", "/etc");
-		map.put("contentPreparationServiceMessage.serviceRequest.requestInfo.compressionRequest.compressionFormat", "ZIP");
+		map.put("mainMessage.serviceRequest.requestInfo.compressionRequest.outputDirParam", "/etc");
+		map.put("mainMessage.serviceRequest.requestInfo.compressionRequest.compressionFormatParam", "ZIP");
 		String text = "id";
 		Field field = myObject.getClass().getDeclaredField(text);
 		System.out.println(checkType(field));
